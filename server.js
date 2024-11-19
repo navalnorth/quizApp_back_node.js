@@ -1,5 +1,4 @@
 require('dotenv').config();
-const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const express = require('express');
 const cors = require('cors')
@@ -11,32 +10,12 @@ const app = express();
 app.use(cors({origin: "http://localhost:8080"}));
 app.use(bodyParser.json())
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-const swaggerOptions = {
-    swaggerDefinition : {
-        openapi: '3.0.0',
-        info: {
-            title: 'API quiz',
-            version: '0.0.1',
-            description: 'Je suis un API',
-            contact : {
-                name: 'Swagger'
-            },
-            servers: [{url: 'http://localhost:3306'}]
-        }
-    },
-    apis: ["./routes/*.js"]
-}
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions)
-app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-
 const db = mysql.createConnection({
-    host: process.env.PROD_DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    port: 3306,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER, 
+    password: process.env.DB_PASSWORD, 
+    database: process.env.DB_NAME, 
+    port: process.env.DB_PORT || 3306, 
 });
 
 
