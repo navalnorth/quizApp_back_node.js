@@ -5,9 +5,9 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 
 const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLHOST,
+  database: process.env.MYSQLDATABASE,
 });
 
 
