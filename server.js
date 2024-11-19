@@ -32,6 +32,12 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
+const db = mysql.createConnection({
+    host: process.env.PROD_DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    port: 3306,
+});
 
 
 db.connect((err) => {
