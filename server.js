@@ -1,5 +1,4 @@
 require('dotenv').config();
-const swaggerUi = require('swagger-ui-express')
 const express = require('express');
 const cors = require('cors')
 const mysql = require('mysql2')
