@@ -27,10 +27,18 @@ db.connect((err) => {
     }
 })
 
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 3300;
 app.listen(port, () => {
     console.log('SERVER DEMARRE');
 })
+
+db.query('SELECT 1 + 1 AS solution', (err, results) => {
+    if (err) {
+        console.error('Erreur de connexion à MySQL :', err);
+    } else {
+        console.log('Connexion réussie à MySQL, résultat :', results[0].solution);
+    }
+});
 
 
 
