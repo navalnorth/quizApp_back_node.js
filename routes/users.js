@@ -12,41 +12,7 @@ const db = mysql.createConnection({
 })
 
 
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Récupérer tous les utilisateurs
- *     responses:
- *       200:
- *         description: Liste des utilisateurs
- *         content: 
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 24
- *                   email:
- *                     type: string
- *                     example: "Toto@example.com"
- *                   name:
- *                     type: string
- *                     example: toto
- *                   firstname:
- *                     type: string
- *                     example: dupont
- *                   role:
- *                     type: enum
- *                     example: admin
- *                   created_at:
- *                     type: timestamp
- *                     example: 2024-09-02T07:11:31.000Z
- *                      
- */
+
 router.get('/', (req, res) => {
     const sql = 'SELECT * FROM users';
     db.query(sql, (err, results) => {
@@ -67,52 +33,6 @@ router.get('/', (req, res) => {
 
 
 
-
-/**
- * @swagger
- * /register:
- *   post:
- *     summary: S'inscrire
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 example: "Toto@example.com"
- *               password:
- *                 type: string
- *                 example: "password123"
- *               name:
- *                 type: string
- *                 example: "Dupont"
- *               firstname:
- *                 type: string
- *                 example: "Jean"
- *               role:
- *                 type: string
- *                 example: "user"
- *     responses:
- *       201:
- *         description: Utilisateur créé avec succès
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *                   example: 24
- *                 email:
- *                   type: string
- *                   example: "Toto@example.com"
- *                 message:
- *                   type: string
- *                   example: "Utilisateur créé"
- */
 router.post('/register', async (req, res) => {
     const { email, password, name, firstname, role } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
@@ -126,62 +46,6 @@ router.post('/register', async (req, res) => {
 
 
 
-
-
-/**
- * @swagger
- * /login:
- *   post:
- *     summary: Connexion d'un utilisateur
- *     description: Authentifie un utilisateur et génère un jeton JWT si les informations sont correctes.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 example: user@example.com
- *               password:
- *                 type: string
- *                 example: password123
- *     responses:
- *       200:
- *         description: Utilisateur connecté avec succès
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Utilisateur connecté
- *                 token:
- *                   type: string
- *                   example: <JWT_TOKEN>
- *       401:
- *         description: Email ou mot de passe incorrect
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Email ou mot de passe incorrect
- *       500:
- *         description: Erreur serveur
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Erreur de requête à la base de données
- */
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
