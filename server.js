@@ -35,11 +35,11 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 
 const db = mysql.createConnection({
-    host: isProduction ? process.env.PROD_DB_HOST :'127.0.0.1',
-    password: isProduction ? process.env.PROD_DB_PASSWORD : process.env.DB_PASSWORD,
+    host: isProduction ? process.env.PROD_DB_HOST : '127.0.0.1',
     user: isProduction ? process.env.PROD_DB_USER : process.env.DB_USER,
+    password: isProduction ? process.env.PROD_DB_PASSWORD : process.env.DB_PASSWORD,
     database: isProduction ? process.env.PROD_DB_NAME : process.env.DB_NAME,
-    port: isProduction ? process.env.PROD_PORT : 3306,
+    port: isProduction ? (process.env.PROD_PORT || 3306) : 3306, // Défaut sur 3306
 });
 
 db.connect((err) => {
