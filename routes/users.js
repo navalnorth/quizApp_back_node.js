@@ -90,35 +90,6 @@ function authenticateToken(req, res, next) {
 
 
 
-
-
-/**
- * @swagger
- * /profile:
- *   get:
- *     summary: Récupère le profil de l'utilisateur
- *     description: Renvoie les informations du profil de l'utilisateur authentifié avec un jeton JWT.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Succès - Profil de l'utilisateur
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Profil de l'utilisateur"
- *                 user:
- *                   type: object
- *                   example: { "id": 1, "email": "user@example.com", "role": "user" }
- *       401:
- *         description: Non autorisé - Jeton manquant ou invalide
- *       403:
- *         description: Accès refusé - Jeton invalide ou expiré
- */
 router.get('/profile', authenticateToken, (req, res) => {
     res.json({ message: 'Profil de l\'utilisateur', user: req.user });
 });
