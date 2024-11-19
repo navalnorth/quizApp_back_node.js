@@ -42,6 +42,13 @@ const db = mysql.createConnection({
     port: isProduction ? (process.env.PROD_PORT || 3306) : 3306, // Défaut sur 3306
 });
 
+console.log('Tentative de connexion avec les paramètres suivants :', {
+    host: isProduction ? process.env.PROD_DB_HOST : '127.0.0.1',
+    user: isProduction ? process.env.PROD_DB_USER : process.env.DB_USER,
+    database: isProduction ? process.env.PROD_DB_NAME : process.env.DB_NAME,
+    port: isProduction ? process.env.PROD_PORT : 3306,
+});
+
 db.connect((err) => {
     if (err) {
         console.log('ERREUR');
