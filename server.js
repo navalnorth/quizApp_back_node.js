@@ -25,6 +25,14 @@ const db = mysql.createConnection({
     port: process.env.MYSQLPORT || 3306,
 });
 
+console.log("Configuration MySQL utilisée :");
+console.log("HOST :", process.env.MYSQLHOST);
+console.log("USER :", process.env.MYSQLUSER);
+console.log("DATABASE :", process.env.MYSQLDATABASE);
+console.log("PORT :", process.env.MYSQLPORT);
+console.log("PASSWORD :", process.env.MYSQLPASSWORD ? '******' : 'non défini');
+
+
 db.connect((err) => {
     if (err) {
         console.error('Erreur lors de la connexion à MySQL :', err);
