@@ -21,7 +21,7 @@ console.log("HOST :", process.env.MYSQLHOST);
 console.log("USER :", process.env.MYSQLUSER);
 console.log("DATABASE :", process.env.MYSQLDATABASE);
 console.log("PORT :", process.env.MYSQLPORT);
-console.log("PASSWORD :", process.env.MYSQLPASSWORD ? '******' : 'non défini');
+console.log("PASSWORD :", process.env.MYSQLPASSWORD;
 
 
 db.connect((err) => {
