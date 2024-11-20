@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    password: process.env.MYSQLPASSWORD.trim(),
     database: process.env.MYSQLDATABASE,
     port: process.env.MYSQLPORT || 3306,
 });
@@ -40,6 +40,11 @@ db.connect((err) => {
         console.log('Connexion réussie à MySQL');
     }
 });
+
+if (!process.env.MYSQLPASSWORD || process.env.MYSQLPASSWORD.trim() === '') {
+    console.error('Le mot de passe MySQL n\'est pas défini ou est vide.');
+    process.exit(1);
+}
 
 const port = process.env.PORT || 3300;
 app.listen(port, () => {
