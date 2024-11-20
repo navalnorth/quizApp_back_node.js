@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
-    password: process.env.MYSQLPASSWORD,
+    password: process.env.MYSQL_ROOT_PASSWORD,
     database: process.env.MYSQLDATABASE,
     port: process.env.MYSQLPORT || 3306,
 });
@@ -30,7 +30,7 @@ console.log("HOST :", process.env.MYSQLHOST);
 console.log("USER :", process.env.MYSQLUSER);
 console.log("DATABASE :", process.env.MYSQLDATABASE);
 console.log("PORT :", process.env.MYSQLPORT);
-console.log("PASSWORD :", process.env.MYSQLPASSWORD ? '******' : 'non défini');
+console.log("PASSWORD :", process.env.MYSQL_ROOT_PASSWORD ? '******' : 'non défini');
 
 
 db.connect((err) => {
