@@ -38,7 +38,7 @@ if (!process.env.MYSQLPASSWORD || process.env.MYSQLPASSWORD.trim() === '') {
     process.exit(1);
 }
 
-const port = process.env.PORT || 3300;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log('SERVER DEMARRE sur le port', port);
 });
