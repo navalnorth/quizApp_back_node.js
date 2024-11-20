@@ -8,19 +8,10 @@ const app = express();
 app.use(cors({ origin: "http://localhost:8080" }));
 app.use(bodyParser.json());
 
-// Affiche les variables utilisées pour MySQL (hors production pour débogage)
-if (process.env.NODE_ENV !== 'production') {
-    console.log("Configuration MySQL :");
-    console.log("HOST :", process.env.MYSQLHOST);
-    console.log("USER :", process.env.MYSQLUSER);
-    console.log("DATABASE :", process.env.MYSQLDATABASE);
-    console.log("PORT :", process.env.MYSQLPORT);
-}
-
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
-    password: process.env.MYSQL_ROOT_PASSWORD,
+    password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDATABASE,
     port: process.env.MYSQLPORT || 3306,
 });
@@ -30,7 +21,7 @@ console.log("HOST :", process.env.MYSQLHOST);
 console.log("USER :", process.env.MYSQLUSER);
 console.log("DATABASE :", process.env.MYSQLDATABASE);
 console.log("PORT :", process.env.MYSQLPORT);
-console.log("PASSWORD :", process.env.MYSQL_ROOT_PASSWORD ? '******' : 'non défini');
+console.log("PASSWORD :", process.env.MYSQLPASSWORD ? '******' : 'non défini');
 
 
 db.connect((err) => {
