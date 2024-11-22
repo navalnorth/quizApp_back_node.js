@@ -1,0 +1,50 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout le code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Installer Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # Utilisez la version souhaitée de Node.js
+
+    # 3. Installer les dépendances
+    - name: Install dependencies
+      run: npm install
+
+    # 4. Lancer les tests
+    - name: Run tests
+      run: npm test
+
+    # 5. Vérification du lint
+    - name: Run linter
+      run: npm run lint
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy
+      run: |
+        echo "Déployer l'application"
