@@ -5,7 +5,9 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(cors({ origin: "http://localhost:8080" }));
+app.use(cors({
+    
+ }));
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
@@ -16,14 +18,6 @@ const db = mysql.createConnection({
     port: process.env.MYSQLPORT || 3306,
     socketPath: undefined,
 });
-
-console.log("Configuration MySQL utilisée :");
-console.log("HOST :", process.env.MYSQLHOST);
-console.log("USER :", process.env.MYSQLUSER);
-console.log("DATABASE :", process.env.MYSQLDATABASE);
-console.log("PORT :", process.env.MYSQLPORT);
-console.log("PASSWORD :", process.env.MYSQLPASSWORD);
-
 
 db.connect((err) => {
     if (err) {
@@ -38,7 +32,7 @@ if (!process.env.MYSQLPASSWORD || process.env.MYSQLPASSWORD.trim() === '') {
     process.exit(1);
 }
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('SERVER DEMARRE sur le port', port);
 });
@@ -55,5 +49,5 @@ db.query('SELECT 1 + 1 AS solution', (err, results) => {
 const userRoutes = require('./routes/users.js');
 const quizRoutes = require('./routes/quiz.js');
 
-app.use('/api/users', userRoutes);
-app.use('/api/quiz', quizRoutes);
+app.use('/api/quiz/users', userRoutes);
+app.use('/api/quiz/quiz', quizRoutes);
